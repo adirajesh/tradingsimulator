@@ -1,0 +1,103 @@
+<ion-content padding>
+  <div>
+    <div style="display: block; height: 500px">
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-50">
+      <ion-card>
+        <ion-item>
+          <ion-label stacked>Buy</ion-label>
+          <ion-input type="number" placeholder="Price" [(ngModel)]="buyPrice" ></ion-input>
+          <ion-input type="number" placeholder="Amount" [(ngModel)]="buyAmount" ></ion-input>
+        </ion-item>
+        <button full round ion-button color="secondary" (tap)="buy()">Buy BTC</button>
+      </ion-card>
+    </div>
+    <div class="col col-50">
+      <ion-card>
+        <ion-item>
+          <ion-label stacked>Sell</ion-label>
+          <ion-input type="number" placeholder="Price" [(ngModel)]="sellPrice" ></ion-input>
+          <ion-input type="number" placeholder="Amount" [(ngModel)]="sellAmount" ></ion-input>
+        </ion-item>
+        <button full round ion-button color="danger" (tap)="sell()">Sell BTC</button>
+      </ion-card>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col col-50">
+      <ion-card>
+        <ion-card-title>
+          <ion-item>
+            Bids
+          </ion-item>
+        </ion-card-title>
+        <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col col col-50>
+                  Price
+                  <br>
+                  <ion-list>
+                    <ion-item *ngFor="let bid of bids.price">
+                      <ion-label>${{bid | number : '1.2-2'}}</ion-label>
+                    </ion-item>
+                  </ion-list>
+                </ion-col>
+  
+                <ion-col col col-50>
+                  Total (BTC)
+                  <br>
+                  <ion-list>
+                    <ion-item *ngFor="let bid of bids.qty">
+                      <ion-label>{{bid | number : '1.8-8'}}</ion-label>
+                    </ion-item>
+                  </ion-list>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+      </ion-card>
+    </div>
+    <div class="col col-50">
+      <ion-card>
+        <ion-card-title>
+          <ion-item>
+            Asks
+          </ion-item>
+
+        </ion-card-title>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col col col-50>
+                Price
+                <br>
+                <ion-list>
+                  <ion-item *ngFor="let ask of asks.price">
+                    <ion-label>${{ask | number : '1.2-2'}}</ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+
+              <ion-col col col-50>
+                Total (BTC)
+                <br>
+                <ion-list>
+                  <ion-item *ngFor="let ask of asks.qty">
+                    <ion-label>{{ask | number : '1.8-8'}}</ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
